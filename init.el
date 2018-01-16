@@ -5,6 +5,8 @@
 ;; You may delete these explanatory comments.
 (package-initialize)
 
+(setq gc-cons-threshold 100000000) ;; 100mb, default: 800kb
+
 (load-file (concat user-emacs-directory "home-directory.el"))
 (load-file (concat user-emacs-directory "org-settings.el"))
 
@@ -16,9 +18,15 @@
  '(inhibit-startup-screen t)
  '(initial-buffer-choice (concat org-directory "Home.org"))
  '(menu-bar-mode nil)
+ '(org-agenda-files
+   (\`
+    ((\,
+      (concat org-directory "refile.org"))
+     (\,
+      (concat org-directory "Home.org")))))
  '(package-selected-packages
    (quote
-    (toml-mode sml-mode scribble-mode scheme-complete rust-mode racket-mode quack pollen-mode paredit haskell-mode cider better-defaults)))
+    (s-buffer zerodark-theme org-plus-contrib org better-defaults)))
  '(show-paren-mode t)
  '(tool-bar-mode nil))
 
@@ -33,7 +41,8 @@
 (setq ido-enable-flex-matching t)
 (setq ido-everywhere t)
 (define-key global-map (kbd "RET") 'newline-and-indent)
-(load-theme 'misterioso t)
+(load-theme 'zerodark t)
+(zerodark-setup-modeline-format)
 
 (setq package-archives
       '(("gnu" . "http://elpa.gnu.org/packages/")
