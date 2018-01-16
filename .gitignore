@@ -2,3 +2,7 @@ bookmarks
 home-directory.el
 ido.last
 *~
+auto-save-list
+backups
+elpa
+network-security.data
