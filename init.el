@@ -14,6 +14,13 @@
 (load-file (concat user-emacs-directory "home-directory.el"))
 (load-file (concat user-emacs-directory "org-settings.el"))
 
+(defun org-mode-set-up-key-bindings ()
+  (define-key org-mode-map (kbd "C-t") 'org-time-stamp)
+  ;; If ncecessary, add more calls to 'define-key here ...
+  )
+
+(add-hook 'org-mode-hook 'org-mode-set-up-key-bindings)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
