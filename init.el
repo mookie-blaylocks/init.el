@@ -7,6 +7,10 @@
 
 (setq gc-cons-threshold 100000000) ;; 100mb, default: 800kb
 
+(setq package-archives
+      '(("gnu" . "http://elpa.gnu.org/packages/")
+        ("melpa" . "http://melpa.org/packages/")))
+
 (load-file (concat user-emacs-directory "home-directory.el"))
 (load-file (concat user-emacs-directory "org-settings.el"))
 
@@ -44,9 +48,6 @@
 (load-theme 'zerodark t)
 (zerodark-setup-modeline-format)
 
-(setq package-archives
-      '(("gnu" . "http://elpa.gnu.org/packages/")
-        ("melpa" . "http://melpa.org/packages/")))
 
 (setq apropos-sort-by-scores t)
 
