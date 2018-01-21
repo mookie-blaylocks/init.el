@@ -1,5 +1,5 @@
 (load-library "url-handlers")
-;; Added by Package.el.  This must come before configurations of
+;; Added by .el.  This must come before configurations of
 ;; installed packages.  Don't delete this line.  If you don't want it,
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
@@ -14,13 +14,6 @@
 (load-file (concat user-emacs-directory "home-directory.el"))
 (load-file (concat user-emacs-directory "org-settings.el"))
 
-(defun org-mode-set-up-key-bindings ()
-  (define-key org-mode-map (kbd "C-t") 'org-time-stamp)
-  ;; If ncecessary, add more calls to 'define-key here ...
-  )
-
-(add-hook 'org-mode-hook 'org-mode-set-up-key-bindings)
-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -29,12 +22,6 @@
  '(inhibit-startup-screen t)
  '(initial-buffer-choice (concat org-directory "Home.org"))
  '(menu-bar-mode nil)
- '(org-agenda-files
-   (\`
-    ((\,
-      (concat org-directory "refile.org"))
-     (\,
-      (concat org-directory "Home.org")))))
  '(package-selected-packages
    (quote
     (s-buffer zerodark-theme org-plus-contrib org better-defaults)))
@@ -55,7 +42,6 @@
 (load-theme 'zerodark t)
 (zerodark-setup-modeline-format)
 
-
 (setq apropos-sort-by-scores t)
 
 (setq ring-bell-function
@@ -65,3 +51,7 @@
           (run-with-idle-timer 0.1 nil
                                (lambda (fg) (set-face-foreground 'mode-line fg))
                                orig-fg))))
+
+(load-library "find-lisp")
+(setq org-agenda-files
+      (find-lisp-find-files org-directory "\.org$"))

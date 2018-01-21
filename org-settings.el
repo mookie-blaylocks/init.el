@@ -1,10 +1,5 @@
 (setq org-directory (concat home-directory "/Dropbox/Org/"))
 
-(custom-set-variables
- '(org-agenda-files
-   `(,(concat org-directory "refile.org")
-     ,(concat org-directory "Home.org"))))
-
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-cc" 'org-capture)
 (define-key global-map "\C-cb" 'org-iswitchb)
@@ -43,3 +38,11 @@
         ("p" "Phone Call" entry
          (file (concat org-directory "refile.org"))
          #'org-capture-phone)))
+
+(defun org-mode-set-up-key-bindings ()
+  (define-key org-mode-map (kbd "C-t") 'org-time-stamp)
+  ;; If ncecessary, add more calls to 'define-key here ...
+  )
+
+(add-hook 'org-mode-hook 'org-mode-set-up-key-bindings)
+
