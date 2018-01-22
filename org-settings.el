@@ -45,6 +45,9 @@
   )
 
 (add-hook 'org-mode-hook 'org-mode-set-up-key-bindings)
+(add-hook 'org-mode-hook #'(lambda ()
+			     (visual-line-mode)
+			     (org-indent-mode)))
 
 (load-library "find-lisp")
 (setq org-agenda-files
