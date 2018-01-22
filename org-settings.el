@@ -46,3 +46,6 @@
 
 (add-hook 'org-mode-hook 'org-mode-set-up-key-bindings)
 
+(load-library "find-lisp")
+(setq org-agenda-files
+      (find-lisp-find-files org-directory "\.org$"))

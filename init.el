@@ -39,8 +39,6 @@
 (setq ido-enable-flex-matching t)
 (setq ido-everywhere t)
 (define-key global-map (kbd "RET") 'newline-and-indent)
-(load-theme 'zerodark t)
-(zerodark-setup-modeline-format)
 
 (setq apropos-sort-by-scores t)
 
@@ -52,6 +50,5 @@
                                (lambda (fg) (set-face-foreground 'mode-line fg))
                                orig-fg))))
 
-(load-library "find-lisp")
-(setq org-agenda-files
-      (find-lisp-find-files org-directory "\.org$"))
+(load-theme 'zerodark t)
+(zerodark-setup-modeline-format)
