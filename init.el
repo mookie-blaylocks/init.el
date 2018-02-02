@@ -24,7 +24,7 @@
  '(menu-bar-mode nil)
  '(package-selected-packages
    (quote
-    (s-buffer zerodark-theme org-plus-contrib org better-defaults)))
+    (scala-mode which-key s-buffer zerodark-theme org-plus-contrib org better-defaults)))
  '(show-paren-mode t)
  '(tool-bar-mode nil))
 
@@ -49,6 +49,8 @@
           (run-with-idle-timer 0.1 nil
                                (lambda (fg) (set-face-foreground 'mode-line fg))
                                orig-fg))))
+
+(global-set-key (kbd "M-o") 'other-window)
 
 (load-theme 'zerodark t)
 (zerodark-setup-modeline-format)
