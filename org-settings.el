@@ -25,18 +25,18 @@
 (load-file (concat user-emacs-directory "org-functions.el"))
 (setq org-capture-templates
       '(("c" "Class" entry
-         (file (concat org-directory "refile.org"))
+         (file (concat org-directory "Home.org"))
          #'org-capture-class)
         ("e" "Event" entry
-         (file (concat org-directory "refile.org"))
+         (file (concat org-directory "Home.org"))
          #'org-capture-event)
         ("n" "Note" entry
-         (file (concat org-directory "refile.org"))
+         (file (concat org-directory "Home.org"))
          #'org-capture-note)
         ("e" "Exercise" entry
-         (file (concat org-directory "refile.org")))
+         (file (concat org-directory "Home.org")))
         ("p" "Phone Call" entry
-         (file (concat org-directory "refile.org"))
+         (file (concat org-directory "Home.org"))
          #'org-capture-phone)))
 
 (defun org-mode-set-up-key-bindings ()
