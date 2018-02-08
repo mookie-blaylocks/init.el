@@ -22,6 +22,9 @@
  '(inhibit-startup-screen t)
  '(initial-buffer-choice (concat org-directory "Home.org"))
  '(menu-bar-mode nil)
+ '(org-agenda-files
+   (quote
+    ("c:/Users/chath/Dropbox/Org/Winchester.org" "c:/Users/chath/Dropbox/Org/Wedding/Wedding.org" "c:/Users/chath/Dropbox/Org/Wedding/wedding-audio.org" "c:/Users/chath/Dropbox/Org/Someday.org" "c:/Users/chath/Dropbox/Org/Research/Research.org" "c:/Users/chath/Dropbox/Org/NLP/Notes.org" "c:/Users/chath/Dropbox/Org/MA-PhD.org" "c:/Users/chath/Dropbox/Org/Leisure.org" "c:/Users/chath/Dropbox/Org/latex.org" "c:/Users/chath/Dropbox/Org/Home.org" "c:/Users/chath/Dropbox/Org/Food.org" "c:/Users/chath/Dropbox/Org/Fitness.org" "c:/Users/chath/Dropbox/Org/Ethics/Notes.org" "c:/Users/chath/Dropbox/Org/Discrete Mathematics/TA.org" "c:/Users/chath/Dropbox/Org/Computation Theory/Notes.org" "c:/Users/chath/Dropbox/Org/Calendar.org")))
  '(package-selected-packages
    (quote
     (scala-mode which-key s-buffer zerodark-theme org-plus-contrib org better-defaults)))
@@ -51,6 +54,9 @@
                                orig-fg))))
 
 (global-set-key (kbd "M-o") 'other-window)
+
+(add-hook 'latex-mode-hook #'(lambda ()
+			       (visual-line-mode)))
 
 (load-theme 'zerodark t)
 (zerodark-setup-modeline-format)
