@@ -19,6 +19,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   (quote
+    ("5b6b9c2f0121417faa3f69924b2643656cd429044f956bfa5328000b21d78dc9" default)))
  '(inhibit-startup-screen t)
  '(initial-buffer-choice (concat org-directory "Home.org"))
  '(menu-bar-mode nil)
