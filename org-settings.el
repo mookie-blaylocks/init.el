@@ -20,24 +20,21 @@
               ("HOLD" :foreground "orange" :weight bold)
               ("CANCELLED" :foreground "forest green" :weight bold))))
 
-(setq org-default-notes-file (concat org-directory "notes.org"))
+(setq org-default-notes-file (concat (expand-file-name org-directory) "Home.org"))
 
 (load-file (concat user-emacs-directory "org-functions.el"))
 (setq org-capture-templates
-      '(("c" "Class" entry
-         (file (concat org-directory "Home.org"))
-         #'org-capture-class)
-        ("e" "Event" entry
-         (file (concat org-directory "Home.org"))
-         #'org-capture-event)
-        ("n" "Note" entry
-         (file (concat org-directory "Home.org"))
-         #'org-capture-note)
-        ("e" "Exercise" entry
-         (file (concat org-directory "Home.org")))
-        ("p" "Phone Call" entry
-         (file (concat org-directory "Home.org"))
-         #'org-capture-phone)))
+      '(("c" "Class" entry (file org-default-notes-file)
+	 #'org-capture-class )
+        ("e" "Event" entry (file+headline org-default-notes-file "Events")
+	 #'org-capture-event)
+	("m" "Meeting" entry (file+headline org-default-notes-file "Meetings")
+	 #'org-capture-event)
+        ("n" "Note" entry (file+headline org-default-notes-file "Notes")
+	 #'org-capture-note)
+        ("e" "Exercise" entry (file org-default-notes-file))
+	("p" "Phone Call" entry (file+headline org-default-notes-file "Calls")
+	 #'org-capture-phone)))
 
 (defun org-mode-set-up-key-bindings ()
   (define-key org-mode-map (kbd "C-t") 'org-time-stamp)
