@@ -58,6 +58,8 @@
 
 (global-set-key (kbd "M-o") 'other-window)
 
+(scroll-bar-mode nil)
+
 (add-hook 'latex-mode-hook #'(lambda ()
 			       (visual-line-mode)))
 
