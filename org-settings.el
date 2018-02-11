@@ -29,7 +29,7 @@
         ("e" "Event" entry (file+headline org-default-notes-file "Events")
 	 #'org-capture-event)
 	("m" "Meeting" entry (file+headline org-default-notes-file "Meetings")
-	 #'org-capture-event)
+	 #'org-capture-meeting)
         ("n" "Note" entry (file+headline org-default-notes-file "Notes")
 	 #'org-capture-note)
         ("e" "Exercise" entry (file org-default-notes-file))
