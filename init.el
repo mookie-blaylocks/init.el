@@ -58,10 +58,9 @@
 
 (global-set-key (kbd "M-o") 'other-window)
 
-(scroll-bar-mode nil)
-
 (add-hook 'latex-mode-hook #'(lambda ()
 			       (visual-line-mode)))
 
 (load-theme 'zerodark t)
 (zerodark-setup-modeline-format)
+(scroll-bar-mode -1)
