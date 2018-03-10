@@ -27,7 +27,7 @@
  '(menu-bar-mode nil)
  '(package-selected-packages
    (quote
-    (scala-mode which-key s-buffer zerodark-theme org-plus-contrib org better-defaults)))
+    (ensime sbt-mode auctex flyspell-popup lua-mode scala-mode which-key s-buffer zerodark-theme org-plus-contrib org better-defaults)))
  '(show-paren-mode t)
  '(tool-bar-mode nil))
 
