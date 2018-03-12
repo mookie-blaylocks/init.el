@@ -25,12 +25,10 @@
  '(inhibit-startup-screen t)
  '(initial-buffer-choice (concat org-directory "Home.org"))
  '(menu-bar-mode nil)
- '(org-agenda-files
-   (quote
-    ("c:/Users/chath/Dropbox/Org/Winchester.org" "c:/Users/chath/Dropbox/Org/Wedding/Wedding.org" "c:/Users/chath/Dropbox/Org/Wedding/wedding-audio.org" "c:/Users/chath/Dropbox/Org/Someday.org" "c:/Users/chath/Dropbox/Org/Research/Research.org" "c:/Users/chath/Dropbox/Org/NLP/Notes.org" "c:/Users/chath/Dropbox/Org/MA-PhD.org" "c:/Users/chath/Dropbox/Org/Leisure.org" "c:/Users/chath/Dropbox/Org/latex.org" "c:/Users/chath/Dropbox/Org/Home.org" "c:/Users/chath/Dropbox/Org/Food.org" "c:/Users/chath/Dropbox/Org/Fitness.org" "c:/Users/chath/Dropbox/Org/Ethics/Notes.org" "c:/Users/chath/Dropbox/Org/Discrete Mathematics/TA.org" "c:/Users/chath/Dropbox/Org/Computation Theory/Notes.org" "c:/Users/chath/Dropbox/Org/Calendar.org")))
+ '(org-agenda-files nil)
  '(package-selected-packages
    (quote
-    (auctex scala-mode which-key s-buffer zerodark-theme org-plus-contrib org better-defaults)))
+    (auto-complete-auctex slime psgml ensime sbt-mode auctex flyspell-popup lua-mode scala-mode which-key s-buffer zerodark-theme org-plus-contrib org better-defaults)))
  '(show-paren-mode t)
  '(tool-bar-mode nil))
 
@@ -64,3 +62,4 @@
 (load-theme 'zerodark t)
 (zerodark-setup-modeline-format)
 (scroll-bar-mode -1)
+(global-set-key (kbd "C-x g") 'magit-status)
