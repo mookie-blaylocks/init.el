@@ -28,7 +28,7 @@
  '(org-agenda-files nil)
  '(package-selected-packages
    (quote
-    (auto-complete-auctex auctex scala-mode which-key s-buffer zerodark-theme org-plus-contrib org better-defaults)))
+    (auto-complete-auctex slime psgml ensime sbt-mode auctex flyspell-popup lua-mode scala-mode which-key s-buffer zerodark-theme org-plus-contrib org better-defaults)))
  '(show-paren-mode t)
  '(tool-bar-mode nil))
 
@@ -62,3 +62,4 @@
 (load-theme 'zerodark t)
 (zerodark-setup-modeline-format)
 (scroll-bar-mode -1)
+(global-set-key (kbd "C-x g") 'magit-status)
