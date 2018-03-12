@@ -41,9 +41,9 @@
   "Capture an event template for org-capture"
   (cl-labels ((update (date days)
 		      (format-time-string
-		       car org-time-stamp-formats)
+		      (car org-time-stamp-formats)
 		      (seconds-to-time (+ (time-to-seconds date)
-					  (* days 86400)))))
+					  (* days 86400))))))
     (let ((with  (read-string "Meet with: " nil nil '(nil)))
 	  (date  (org-read-date nil t))
 	  (location (read-string "Location: " nil nil '(nil)))
