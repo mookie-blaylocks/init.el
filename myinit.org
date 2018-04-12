@@ -1,0 +1,244 @@
+* Library Load
+#+BEGIN_SRC emacs-lisp
+  (load-library "url-handlers")
+
+  (setq package-archives
+        '(("gnu" . "http://elpa.gnu.org/packages/")
+          ("melpa" . "http://melpa.org/packages/")))
+
+  (setq gc-cons-threshold 100000000) ;; 100mb, default: 800kb
+#+END_SRC
+* Org-mode Settings
+#+BEGIN_SRC emacs-lisp
+  (load-file (concat user-emacs-directory "home-directory.el"))
+  (setq org-directory (concat home-directory "/Dropbox/Org/"))
+
+  (setq org-log-done t)
+
+  (setq org-use-fast-todo-selection t)
+  (setq org-treat-S-cursor-todo-selection-as-state-change nil)
+  (setq org-todo-keywords
+        (quote ((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d)")
+                (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)"))))
+  (setq org-todo-keyword-faces
+        (quote (("TODO" :foreground "gold" :weight bold)
+                ("NEXT" :foreground "gold" :weight bold)
+                ("DONE" :foreground "forest green" :weight bold)
+                ("WAITING" :foreground "orange" :weight bold)
+                ("HOLD" :foreground "orange" :weight bold)
+                ("CANCELLED" :foreground "forest green" :weight bold))))
+
+  (setq org-default-notes-file (concat (expand-file-name org-directory) "Home.org"))
+
+  (setq org-capture-templates
+        '(("c" "Class" entry (file org-default-notes-file)
+           #'org-capture-class )
+          ("e" "Event" entry (file+headline org-default-notes-file "Events")
+           #'org-capture-event)
+          ("m" "Meeting" entry (file+headesline org-default-notes-file "Meetings")
+           #'org-capture-meeting)
+          ("n" "Note" entry (file+headline org-default-notes-file "Notes")
+           #'org-capture-note)
+          ("e" "Exercise" entry (file org-default-notes-file))
+          ("p" "Phone Call" entry (file+headline org-default-notes-file "Calls")
+           #'org-capture-phone)))
+
+  (load-library "find-lisp")
+  (setq org-agenda-files
+        (find-lisp-find-files org-directory "\.org$"))
+#+END_SRC
+
+#+RESULTS:
+
+* Org-mode Capture
+#+BEGIN_SRC emacs-lisp
+  (defun org-capture-class ()
+    "Capture a class template for org-capture"
+    (cl-labels ((update (date days)
+                        (format-time-string
+                         (car org-time-stamp-formats)
+                         (seconds-to-time (+ (time-to-seconds date)
+                                             (* days 86400))))))
+      (let ((course   (read-string "Course: " nil nil '(nil)))
+            (week     (read-string "Week: " nil nil '(nil)))
+            (lecture  (read-string "Lecture No.: " nil nil '(nil)))
+            (date     (org-read-date nil t))
+            (location (read-string "Location: " nil nil '(nil))))
+        (when (and course week lecture date location)
+          (concat (format "* TODO %s: Week %s Lecture %s\n"
+                          course week lecture)
+                  (format "  SCHEDULED: %s\n" (update date 0))
+                  (format "  Location: %s %%?\n" location)
+                  (format "** TODO %s: review lecture %s from week %s\n"
+                          course lecture week)
+                  (format "    DEADLINE: %s SCHEDULED: %s\n"
+                          (update date 2) (update date 1)))))))
+
+  (defun org-capture-event ()
+    "Capture an event template for org-capture"
+    (cl-labels ((update (date days)
+                        (format-time-string
+                         (car org-time-stamp-formats)
+                         (seconds-to-time (+ (time-to-seconds date)
+                                             (* days 86400))))))
+      (let ((title   (read-string "Title: " nil nil '(nil)))
+            (speaker (read-string "Speaker: " nil nil '(nil)))
+            (date    (org-read-date nil t))
+            (location (read-string "Location: " nil nil '(nil))))
+        (when (and title speaker date location)
+          (concat (format "* %s with %s\n"
+                          title speaker)
+                  (format "  %s\n" (update date 0))
+                  (format "  Location: %s %%?\n" location))))))
+
+  (defun org-capture-meeting ()
+    "Capture an event template for org-capture"
+    (cl-labels ((update (date days)
+                        (format-time-string
+                        (car org-time-stamp-formats)
+                        (seconds-to-time (+ (time-to-seconds date)
+                                            (* days 86400))))))
+      (let ((with  (read-string "Meet with: " nil nil '(nil)))
+            (date  (org-read-date nil t))
+            (location (read-string "Location: " nil nil '(nil)))
+            (about    (read-string "Regarding: " nil nil '(nil))))
+        (when (and with date location about)
+          (concat (format "* Meet with %s\n" with)
+                  (format "  %s\n" (update date 0))
+                  (format "  Regarding %s\n" about)
+                  (format "  Location: %s %%?\n" location))))))
+
+  (defun org-capture-note ()
+    "Capture a note template for org-capture"
+    (cl-labels ((update (date days)
+                        (format-time-string
+                         (car org-time-stamp-formats)
+                         (seconds-to-time (+ (time-to-seconds date)
+                                             (* days 86400))))))
+      (let ((note (read-string "Note: " nil nil '(nil)))
+            (date (org-read-date nil t)))
+        (when (and note date)
+          (concat (format "* %s\n" note)
+                  (format "  Noted: %s" date))))))
+
+  (defun org-capture-phone
+      "Capture a phone call template for org-capture"
+    (cl-labels ((update (date days)
+                        (format-time-string
+                         (car org-time-stamp-formats)
+                         (seconds-to-time (+ (time-to-seconds date)
+                                             (* days 86400))))))
+      (let ((contact (read-string "Contact: " nil nil '(nil)))
+            (subject (read-string "Subject: " nil nil '(nil)))
+            (date    (org-read-date nil t)))
+        (when (and contact subject date)
+          (concat (format "* TODO Call %s about %s\n"
+                          contact subject)
+                  (format "  Noted: %s" date))))))
+#+END_SRC
+
+#+RESULTS:
+: org-capture-phone
+
+* Key Bindings
+#+BEGIN_SRC emacs-lisp
+  (define-key global-map "\C-cl" 'org-store-link)
+  (define-key global-map "\C-cc" 'org-capture)
+  (define-key global-map "\C-cb" 'org-iswitchb)
+  (define-key global-map "\C-ca" 'org-agenda)
+  (define-key global-map "\C-ct" 'org-set-tags)
+
+  (defun org-mode-set-up-key-bindings ()
+    (define-key org-mode-map (kbd "C-t") 'org-time-stamp)
+    ;; If ncecessary, add more calls to 'define-key here ...
+    )
+
+
+  (global-set-key (kbd "C-x g") 'magit-status)
+  (global-set-key (kbd "M-o") 'other-window)
+  (define-key global-map (kbd "RET") 'newline-and-indent)
+#+END_SRC
+* Mode Hooks
+** org-mode
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'org-mode-hook 'org-mode-set-up-key-bindings)
+  (add-hook 'org-mode-hook #'(lambda ()
+                               (visual-line-mode)
+                               (org-indent-mode)
+                               (flyspell-mode)))
+#+END_SRC
+** latex-mode
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'latex-mode-hook #'(lambda ()
+                                 (visual-line-mode)
+                                 (flyspell-mode)))
+#+END_SRC
+* Set Variables
+#+BEGIN_SRC emacs-lisp
+  (custom-set-variables
+   ;; custom-set-variables was added by Custom.
+   ;; If you edit it by hand, you could mess it up, so be careful.
+   ;; Your init file should contain only one such instance.
+   ;; If there is more than one, they won't work right.
+   '(ansi-color-names-vector
+     ["#282c34" "#ff6c6b" "#98be65" "#da8548" "#61afef" "#c678dd" "#1f5582" "#abb2bf"])
+   '(custom-safe-themes
+     (quote
+      ("bce3ae31774e626dce97ed6d7781b4c147c990e48a35baedf67e185ebc544a56" "dcb9fd142d390bb289fee1d1bb49cb67ab7422cd46baddf11f5c9b7ff756f64c" "ff7625ad8aa2615eae96d6b4469fcc7d3d20b2e1ebc63b761a349bebbb9d23cb" "5b6b9c2f0121417faa3f69924b2643656cd429044f956bfa5328000b21d78dc9" default)))
+   
+   '(inhibit-startup-screen t)
+   '(initial-buffer-choice (concat org-directory "Home.org"))
+   '(org-agenda-files nil)
+   '(package-selected-packages
+     (quote
+      (pomidor org-bullets challenger-deep-theme dracula-theme adaptive-wrap markdown-mode markdown-mode+ markdown-preview-eww markdown-preview-mode auto-complete-auctex slime psgml ensime sbt-mode auctex flyspell-popup lua-mode scala-mode which-key s-buffer zerodark-theme org-plus-contrib org better-defaults)))
+   )
+
+
+  (setq ido-enable-flex-matching t)
+  (setq ido-everywhere t)
+
+  (setq apropos-sort-by-scores t)
+  (fset 'yes-or-no-p 'y-or-n-p)
+  (setq ring-bell-function
+        (lambda ()
+          (let ((orig-fg (face-foreground 'mode-line)))
+            (set-face-foreground 'mode-line "#F2804F")
+            (run-with-idle-timer 0.1 nil
+                                 (lambda (fg) (set-face-foreground 'mode-line fg))
+                                 orig-fg))))
+
+  (setq pomidor-seconds (* 25 60))
+  (setq pomidor-break-seconds (* 5 60))
+  (setq pomidor-sound-tick nil)
+  (setq pomidor-sound-tack nil)
+  (setq-default ispell-program-name "aspell")
+#+END_SRC
+* Set Font
+#+BEGIN_SRC emacs-lisp
+  (custom-set-faces
+   ;; custom-set-faces was added by Custom.
+   ;; If you edit it by hand, you could mess it up, so be careful.
+   ;; Your init file should contain only one such instance.
+   ;; If there is more than one, they won't work right.
+   '(default ((t (:family "Triplicate T4c" :foundry "outline" :slant normal :weight normal :height 120 :width normal)))))
+#+END_SRC
+* Set Modes
+#+BEGIN_SRC emacs-lisp
+  (global-linum-mode t)
+  (ido-mode t)
+  (which-key-mode)
+  (which-key-setup-side-window-bottom)
+  (global-hl-line-mode)
+  (global-linum-mode)
+  (scroll-bar-mode -1)
+  (show-paren-mode t)
+  (smartparens-mode)
+  (tool-bar-mode -1)
+  (menu-bar-mode -1)
+#+END_SRC
+* Load Theme
+#+BEGIN_SRC emacs-lisp
+  (zerodark-setup-modeline-format)
+  (load-theme 'dracula t)
+#+END_SRC
