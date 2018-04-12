@@ -81,3 +81,6 @@
         (concat (format "* TODO Call %s about %s\n"
                         contact subject)
                 (format "  Noted: %s" date))))))
+
+(dolist (hook '(org-mode-hook))
+  (add-hook hook (lambda () (flyspell-mode 1))))
