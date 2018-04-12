@@ -208,6 +208,8 @@
                                  (lambda (fg) (set-face-foreground 'mode-line fg))
                                  orig-fg))))
 
+  (setenv "GIT_ASKPASS" "git-gui--askpass")
+
   (setq pomidor-seconds (* 25 60))
   (setq pomidor-break-seconds (* 5 60))
   (setq pomidor-sound-tick nil)
