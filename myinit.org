@@ -8,6 +8,40 @@
 
   (setq gc-cons-threshold 100000000) ;; 100mb, default: 800kb
 #+END_SRC
+* Esnure Packages
+** Repositories
+#+BEGIN_SRC emacs-lisp
+  (require 'package)
+  (add-to-list 'package-archives
+               '("gnu" . "http://elpa.gnu.org/packages/"))
+  (add-to-list 'package-archives
+               '("melpa" . "http://melpa.org/packages/"))
+
+#+END_SRC
+** Package List
+#+BEGIN_SRC emacs-lisp
+  (setq package-list
+        '(challenger-deep-theme
+          dracula-theme
+          scala-mode
+          slime
+          which-key
+          zerodark-theme))
+#+END_SRC
+** Install Missing
+#+BEGIN_SRC emacs-lisp
+  ;; actiave the packages
+  (package-initialize)
+
+  ;; fetch the list of packages available
+  (unless package-archive-contents
+    (package-refresh-contents))
+
+  ;; install the missing packages
+  (dolist (package package-list)
+    (unless (package-installed-p package)
+      (package-install package)))
+#+END_SRC
 * Org-mode Settings
 #+BEGIN_SRC emacs-lisp
   (load-file (concat user-emacs-directory "home-directory.el"))
@@ -233,6 +267,8 @@
             (run-with-idle-timer 0.1 nil
                                  (lambda (fg) (set-face-foreground 'mode-line fg))
                                  orig-fg))))
+
+  (setenv "GIT_ASKPASS" "git-gui--askpass")
 
   (setq pomidor-seconds (* 25 60))
   (setq pomidor-break-seconds (* 5 60))
