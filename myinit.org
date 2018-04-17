@@ -41,15 +41,16 @@
            #'org-capture-note)
           ("e" "Exercise" entry (file org-default-notes-file))
           ("p" "Phone Call" entry (file+headline org-default-notes-file "Calls")
-           #'org-capture-phone)))
+           #'org-capture-phone)
+          ("g" "Groceries" entry (file-org-default-notes-file "Groceries")
+           #'org-capture-grocery)
+          ("r" "Recipe" entry (file-org-default-notes-file "Recipe")
+           #'org-capture-recipe)))
 
   (load-library "find-lisp")
   (setq org-agenda-files
         (find-lisp-find-files org-directory "\.org$"))
 #+END_SRC
-
-#+RESULTS:
-
 * Org-mode Capture
 #+BEGIN_SRC emacs-lisp
   (defun org-capture-class ()
@@ -135,6 +136,31 @@
           (concat (format "* TODO Call %s about %s\n"
                           contact subject)
                   (format "  Noted: %s" date))))))
+
+  (defun org-capture-grocery
+      "Capture a grocery item template for org-capture"
+    (cl-labels ((update (date days)
+                        (format-time-string
+                         (car org-time-stamp-formats)
+                         (seconds-to-time (+ (time-to-seconds date)
+                                             (* days 86400))))))
+      (let (item (read-string "Buy: " nil nil '(nil)))
+        (when (and item t)
+          (format "* %s\n" item)))))
+
+  (defun org-capture-recipe
+      "Capture a recipe template for org-capture"
+    (cl-labels ((update (date days)
+                        (format-time-string
+                         (car org-time-stamp-formats)
+                         (seconds-to-time (+ (time-to-seconds date)
+                                             (* days 86400))))))
+      (let ((title (read-string "Name of Recipe: " nil nil '(nil)))
+            (url   (read-string "url: " nil nil '(nil))))
+        (when (and title url)
+          (concat (format "* [[%s]" url)
+                  (format "[%s]]" title))))))
+
 #+END_SRC
 
 #+RESULTS:
