@@ -8,7 +8,7 @@
 
   (setq gc-cons-threshold 100000000) ;; 100mb, default: 800kb
 #+END_SRC
-* Esnure Packages
+* Ensure Packages
 ** Repositories
 #+BEGIN_SRC emacs-lisp
   (require 'package)
