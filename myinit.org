@@ -273,5 +273,6 @@
 * Load Theme
 #+BEGIN_SRC emacs-lisp
   (zerodark-setup-modeline-format)
-  (load-theme 'dracula t)
+  (load-theme 'challenger-deep t)
+  (load-theme 'org-beautify t)
 #+END_SRC
