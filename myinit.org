@@ -68,9 +68,7 @@
   (setq org-default-notes-file (concat (expand-file-name org-directory) "Home.org"))
 
   (setq org-capture-templates
-        '(("c" "Class" entry (file org-default-notes-file)
-           #'org-capture-class )
-          ("e" "Event" entry (file+headline org-default-notes-file "Events")
+        '(("e" "Event" entry (file+headline org-default-notes-file "Events")
            #'org-capture-event)
           ("m" "Meeting" entry (file+headesline org-default-notes-file "Meetings")
            #'org-capture-meeting)
@@ -79,9 +77,9 @@
           ("e" "Exercise" entry (file org-default-notes-file))
           ("p" "Phone Call" entry (file+headline org-default-notes-file "Calls")
            #'org-capture-phone)
-          ("g" "Groceries" entry (file-org-default-notes-file "Groceries")
+          ("g" "Groceries" entry (file+headline org-default-notes-file "Groceries")
            #'org-capture-grocery)
-          ("r" "Recipe" entry (file-org-default-notes-file "Recipe")
+          ("r" "Recipe" entry (file+headline org-default-notes-file "Recipes")
            #'org-capture-recipe)))
 
   (load-library "find-lisp")
@@ -90,28 +88,6 @@
 #+END_SRC
 * Org-mode Capture
 #+BEGIN_SRC emacs-lisp
-  (defun org-capture-class ()
-    "Capture a class template for org-capture"
-    (cl-labels ((update (date days)
-                        (format-time-string
-                         (car org-time-stamp-formats)
-                         (seconds-to-time (+ (time-to-seconds date)
-                                             (* days 86400))))))
-      (let ((course   (read-string "Course: " nil nil '(nil)))
-            (week     (read-string "Week: " nil nil '(nil)))
-            (lecture  (read-string "Lecture No.: " nil nil '(nil)))
-            (date     (org-read-date nil t))
-            (location (read-string "Location: " nil nil '(nil))))
-        (when (and course week lecture date location)
-          (concat (format "* TODO %s: Week %s Lecture %s\n"
-                          course week lecture)
-                  (format "  SCHEDULED: %s\n" (update date 0))
-                  (format "  Location: %s %%?\n" location)
-                  (format "** TODO %s: review lecture %s from week %s\n"
-                          course lecture week)
-                  (format "    DEADLINE: %s SCHEDULED: %s\n"
-                          (update date 2) (update date 1)))))))
-
   (defun org-capture-event ()
     "Capture an event template for org-capture"
     (cl-labels ((update (date days)
@@ -159,33 +135,28 @@
           (concat (format "* %s\n" note)
                   (format "  Noted: %s" date))))))
 
-  (defun org-capture-phone
+  (defun org-capture-phone ()
       "Capture a phone call template for org-capture"
-    (cl-labels ((update (date days)
-                        (format-time-string
-                         (car org-time-stamp-formats)
-                         (seconds-to-time (+ (time-to-seconds date)
-                                             (* days 86400))))))
       (let ((contact (read-string "Contact: " nil nil '(nil)))
             (subject (read-string "Subject: " nil nil '(nil)))
             (date    (org-read-date nil t)))
         (when (and contact subject date)
           (concat (format "* TODO Call %s about %s\n"
                           contact subject)
-                  (format "  Noted: %s" date))))))
+                  (format "  Noted: %s" date)))))
 
-  (defun org-capture-grocery
-      "Capture a grocery item template for org-capture"
+  (defun org-capture-grocery ()
+      "Capture a grocery template for org-capture"
     (cl-labels ((update (date days)
                         (format-time-string
                          (car org-time-stamp-formats)
                          (seconds-to-time (+ (time-to-seconds date)
                                              (* days 86400))))))
-      (let (item (read-string "Buy: " nil nil '(nil)))
-        (when (and item t)
+      (let ((item (read-string "Item: " nil nil '(nil))))
+        (when item
           (format "* %s\n" item)))))
 
-  (defun org-capture-recipe
+  (defun org-capture-recipe ()
       "Capture a recipe template for org-capture"
     (cl-labels ((update (date days)
                         (format-time-string
@@ -196,7 +167,7 @@
             (url   (read-string "url: " nil nil '(nil))))
         (when (and title url)
           (concat (format "* [[%s]" url)
-                  (format "[%s]]" title))))))
+                  (format "[%s]]\n" title))))))
 
 #+END_SRC
 
