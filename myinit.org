@@ -8,7 +8,7 @@
 
   (setq gc-cons-threshold 100000000) ;; 100mb, default: 800kb
 #+END_SRC
-* Esnure Packages
+* Ensure Packages
 ** Repositories
 #+BEGIN_SRC emacs-lisp
   (require 'package)
@@ -30,17 +30,20 @@
 #+END_SRC
 ** Install Missing
 #+BEGIN_SRC emacs-lisp
-  ;; actiave the packages
+  ;; activate the packages
   (package-initialize)
 
   ;; fetch the list of packages available
   (unless package-archive-contents
     (package-refresh-contents))
 
+  (if (not (package-installed-p 'use-package))
+      (package-install 'use-package))
+  (require 'use-package)
+
   ;; install the missing packages
   (dolist (package package-list)
-    (unless (package-installed-p package)
-      (package-install package)))
+    :ensure package)
 #+END_SRC
 * Org-mode Settings
 #+BEGIN_SRC emacs-lisp
