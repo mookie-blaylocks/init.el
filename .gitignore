@@ -8,3 +8,5 @@ elpa
 network-security.data
 places
 eshell
+/myinit.el
+server
