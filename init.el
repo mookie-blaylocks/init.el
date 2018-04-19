@@ -9,7 +9,16 @@
 
 (setq package-archives
       '(("gnu" . "http://elpa.gnu.org/packages/")
-        ("melpa" . "http://melpa.org/packages/")))
+	("org" . "http://orgmode.org/elpa/")
+        ("melpa" . "http://melpa.org/packages/")
+	("melpa-stable" . "http://stable.melpa.org/packages/"))
+      package-archive-priorities '(("melpa-stable" . 1)))
+
+(package-initialize)
+(when (not package-archive-contents)
+  (package-refresh-contents)
+  (package-install 'use-package))
+(require 'use-package)
 
 (load-file (concat user-emacs-directory "home-directory.el"))
 (load-file (concat user-emacs-directory "org-settings.el"))
@@ -64,3 +73,11 @@
 (load-theme 'zerodark t)
 (zerodark-setup-modeline-format)
 (scroll-bar-mode -1)
+(global-set-key (kbd "C-x g") 'magit-status)
+(use-package ensime
+	     :ensure t
+	     :pin melpa)
+(use-package sbt-mode
+  :pin melpa)
+(use-package scala-mode
+  :pin melpa)
