@@ -25,6 +25,7 @@
           dracula-theme
           scala-mode
           slime
+          elpy
           which-key
           zerodark-theme))
 #+END_SRC
@@ -37,9 +38,14 @@
   (unless package-archive-contents
     (package-refresh-contents))
 
-  (if (not (package-installed-p 'use-package))
-      (package-install 'use-package))
-  (require 'use-package)
+  (mapc #'(lambda (package)
+            (unless (package-installed-p package)
+              (package-install package)))
+        package-list)
+
+  ;; (if (not (package-installed-p 'use-package))
+  ;;     (package-install 'use-package))
+  ;; (require 'use-package)
 
   ;; install the missing packages
   (dolist (package package-list)
