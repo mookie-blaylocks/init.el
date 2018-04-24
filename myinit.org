@@ -281,23 +281,27 @@
 #+END_SRC
 * Load Theme
 #+BEGIN_SRC emacs-lisp
-  (zerodark-setup-modeline-format)
-  (load-theme 'challenger-deep t)
-  (load-theme 'org-beautify t)
-  (defun light-theme ()
-    "Load the light theme"
-    (load-theme 'twilight-bright t)
-    (load-theme 'org-beautify t))
-  (global-set-key (kbd "C-c l") (light-theme))
-  (defun med-theme ()
-    "Load the medium theme"
-    (load-theme 'anti-zenburn t)
-    (load-theme 'org-beautify t))
-  (global-set-key (kbd "C-c m") (med-theme))
-  (defun dark-theme ()
-    "Load the dark theme"
-    (load-theme 'challenger-deep t)
-    (load-theme 'org-beautify t))
-  (global-set-key (kbd "C-c d") (dark-theme))
+  (add-hook 'after-init-hook (lambda ()
+                               (zerodark-setup-modeline-format)
+                               (load-theme 'challenger-deep t)))
+
+  ;; (load-theme 'org-beautify t)
+  (global-set-key (kbd "C-c l") (lambda ()
+                                  (interactive)
+                                  (load-theme 'twilight-bright t)
+                                  (disable-theme 'anti-zenburn)
+                                  (disable-theme 'challenger-deep)))
+
+  (global-set-key (kbd "C-c m") (lambda ()
+                                  (interactive)
+                                  (load-theme 'anti-zenburn t)
+                                  (disable-theme 'challenger-deep)
+                                  (disable-theme 'twilight-deep)))
+
+  (global-set-key (kbd "C-c d") (lambda ()
+                                  (interactive)
+                                  (load-theme 'challenger-deep t)
+                                  (disable-theme 'anti-zenburn)
+                                  (disable-theme 'twilight-bright)))
 
 #+END_SRC
