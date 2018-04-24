@@ -278,4 +278,20 @@
   (zerodark-setup-modeline-format)
   (load-theme 'challenger-deep t)
   (load-theme 'org-beautify t)
+  (defun light-theme ()
+    "Load the light theme"
+    (load-theme 'twilight-bright t)
+    (load-theme 'org-beautify t))
+  (global-set-key (kbd "C-c l") (light-theme))
+  (defun med-theme ()
+    "Load the medium theme"
+    (load-theme 'anti-zenburn t)
+    (load-theme 'org-beautify t))
+  (global-set-key (kbd "C-c m") (med-theme))
+  (defun dark-theme ()
+    "Load the dark theme"
+    (load-theme 'challenger-deep t)
+    (load-theme 'org-beautify t))
+  (global-set-key (kbd "C-c d") (dark-theme))
+
 #+END_SRC
