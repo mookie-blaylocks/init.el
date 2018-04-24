@@ -286,22 +286,29 @@
                                (load-theme 'challenger-deep t)))
 
   ;; (load-theme 'org-beautify t)
-  (global-set-key (kbd "C-c l") (lambda ()
-                                  (interactive)
-                                  (load-theme 'twilight-bright t)
-                                  (disable-theme 'anti-zenburn)
-                                  (disable-theme 'challenger-deep)))
 
-  (global-set-key (kbd "C-c m") (lambda ()
-                                  (interactive)
-                                  (load-theme 'anti-zenburn t)
-                                  (disable-theme 'challenger-deep)
-                                  (disable-theme 'twilight-deep)))
+  (defun light-theme ()
+    "Load the light theme"
+    (interactive)
+    (load-theme 'twilight-bright t)
+    (disable-theme 'anti-zenburn)
+    (disable-theme 'challenger-deep))
+  (global-set-key (kbd "C-c l") 'light-theme)
 
-  (global-set-key (kbd "C-c d") (lambda ()
-                                  (interactive)
-                                  (load-theme 'challenger-deep t)
-                                  (disable-theme 'anti-zenburn)
-                                  (disable-theme 'twilight-bright)))
+  (defun medium-theme ()
+    "Load the medium theme"
+    (interactive)
+    (load-theme 'anti-zenburn t)
+    (disable-theme 'challenger-deep)
+    (disable-theme 'twilight-deep))
+  (global-set-key (kbd "C-c m") 'medium-theme)
+
+  (defun dark-theme ()
+    "Load the dark theme"
+    (interactive)
+    (load-theme 'challenger-deep t)
+    (disable-theme 'anti-zenburn)
+    (disable-theme 'twilight-bright))
+  (global-set-key (kbd "C-c d") 'dark-theme)
 
 #+END_SRC
