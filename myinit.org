@@ -281,7 +281,9 @@
   (defun light-theme ()
     "Load the light theme"
     (interactive)
-    ;; Alternative  
+    ;; Alternatives
+    ;; (load-theme 'leuven t)
+    ;; (load-theme 'plan9 t)
     (load-theme 'twilight-bright t)
     ;; (load-theme 'solarized-light t)
     (disable-theme 'anti-zenburn)
@@ -291,6 +293,9 @@
   (defun medium-theme ()
     "Load the medium theme"
     (interactive)
+    ;; Alternatives
+    ;; (load-theme 'ample-light t)
+    ;; (load-theme 'faff t)
     (load-theme 'anti-zenburn t)
     (disable-theme 'challenger-deep)
     (disable-theme 'twilight-deep))
@@ -300,7 +305,7 @@
     "Load the dark theme"
     (interactive)
     ;; Alternatives
-    ;; (load-theme 'dracula t)
+    ;; (load-theme 'base16-dracula t)
     ;; (load-theme 'solarized-dark t)
     ;; (load-theme 'zerodark t)
     (load-theme 'challenger-deep t)
