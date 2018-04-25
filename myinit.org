@@ -275,42 +275,54 @@
   (add-hook 'after-init-hook (lambda ()
                                (zerodark-setup-modeline-format)
                                ;; (load-theme 'org-beautify t)
-                               (load-theme 'anti-zenburn t)))
+                               (medium-theme)))
 
+
+  (defun disable-all-themes ()
+    "Disable themes before initializing a new one"
+    (interactive)
+    (disable-theme 'ample-light)
+    (disable-theme 'anti-zenburn)
+    (disable-theme 'base16-dracula)
+    (disable-theme 'challenger-deep)
+    (disable-theme 'faff)
+    (disable-theme 'leuven)
+    (disable-theme 'plan9)
+    (disable-theme 'solarized-dark)
+    (disable-theme 'solarized-light)  
+    (disable-theme 'twilight-bright)
+    (disable-theme 'zerodark))
 
   (defun light-theme ()
     "Load the light theme"
     (interactive)
+    (disable-all-themes)
     ;; Alternatives
-    ;; (load-theme 'leuven t)
-    ;; (load-theme 'plan9 t)
-    (load-theme 'twilight-bright t)
-    ;; (load-theme 'solarized-light t)
-    (disable-theme 'anti-zenburn)
-    (disable-theme 'challenger-deep))
+    ;; (load-theme 'leuven t))
+    ;; (load-theme 'plan9 t))
+    (load-theme 'twilight-bright t))
+    ;; (load-theme 'solarized-light t))
   (global-set-key (kbd "C-c l") 'light-theme)
 
   (defun medium-theme ()
     "Load the medium theme"
     (interactive)
+    (disable-all-themes)
     ;; Alternatives
-    ;; (load-theme 'ample-light t)
-    ;; (load-theme 'faff t)
-    (load-theme 'anti-zenburn t)
-    (disable-theme 'challenger-deep)
-    (disable-theme 'twilight-deep))
+    ;; (load-theme 'ample-light t))
+    ;; (load-theme 'faff t))
+    (load-theme 'anti-zenburn t))
   (global-set-key (kbd "C-c m") 'medium-theme)
 
   (defun dark-theme ()
     "Load the dark theme"
     (interactive)
+    (disable-all-themes)
     ;; Alternatives
-    ;; (load-theme 'base16-dracula t)
-    ;; (load-theme 'solarized-dark t)
-    ;; (load-theme 'zerodark t)
-    (load-theme 'challenger-deep t)
-    (disable-theme 'anti-zenburn)
-    (disable-theme 'twilight-bright))
+    ;; (load-theme 'base16-dracula t))
+    ;; (load-theme 'solarized-dark t))
+    ;; (load-theme 'zerodark t))
+    (load-theme 'challenger-deep t))
   (global-set-key (kbd "C-c d") 'dark-theme)
 
 #+END_SRC
