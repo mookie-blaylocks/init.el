@@ -256,15 +256,6 @@
   (setq pomidor-sound-tack nil)
   (setq-default ispell-program-name "aspell")
 #+END_SRC
-* Set Font
-#+BEGIN_SRC emacs-lisp
-  (custom-set-faces
-   ;; custom-set-faces was added by Custom.
-   ;; If you edit it by hand, you could mess it up, so be careful.
-   ;; Your init file should contain only one such instance.
-   ;; If there is more than one, they won't work right.
-   '(default ((t (:family "Triplicate T4c" :foundry "outline" :slant normal :weight normal :height 120 :width normal)))))
-#+END_SRC
 * Set Modes
 #+BEGIN_SRC emacs-lisp
   (global-linum-mode t)
@@ -283,14 +274,16 @@
 #+BEGIN_SRC emacs-lisp
   (add-hook 'after-init-hook (lambda ()
                                (zerodark-setup-modeline-format)
-                               (load-theme 'challenger-deep t)))
+                               ;; (load-theme 'org-beautify t)
+                               (load-theme 'anti-zenburn t)))
 
-  ;; (load-theme 'org-beautify t)
 
   (defun light-theme ()
     "Load the light theme"
     (interactive)
+    ;; Alternative  
     (load-theme 'twilight-bright t)
+    ;; (load-theme 'solarized-light t)
     (disable-theme 'anti-zenburn)
     (disable-theme 'challenger-deep))
   (global-set-key (kbd "C-c l") 'light-theme)
@@ -306,6 +299,10 @@
   (defun dark-theme ()
     "Load the dark theme"
     (interactive)
+    ;; Alternatives
+    ;; (load-theme 'dracula t)
+    ;; (load-theme 'solarized-dark t)
+    ;; (load-theme 'zerodark t)
     (load-theme 'challenger-deep t)
     (disable-theme 'anti-zenburn)
     (disable-theme 'twilight-bright))
