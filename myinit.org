@@ -267,7 +267,7 @@
   (tool-bar-mode -1)
   (menu-bar-mode -1)
 #+END_SRC
-* Load Theme
+* Set Themes
 #+BEGIN_SRC emacs-lisp
   (setq theme-list
        '(ample-theme
@@ -395,4 +395,33 @@
     (disable-all-themes)
     (load-theme 'zerodark t))
   (define-key load-dark-theme (kbd "z") 'load-zerodark)
+#+END_SRC
+* Set Fonts
+#+BEGIN_SRC emacs-lisp
+  (define-prefix-command 'switch-font)
+  (global-set-key (kbd "C-c f") 'switch-font)
+
+  (defun load-anonymous-pro ()
+    "Load the Anonymous Pro font"
+    (interactive)
+    (set-default-font "Anonymous Pro 12"))
+  (define-key switch-font (kbd "a") 'load-anonymous-pro)
+
+  (defun load-inconsolata ()
+    "Load the Inconsolata font"
+    (interactive)
+    (set-default-font "Inconsolata 12"))
+  (define-key switch-font (kbd "i") 'load-inconsolata)
+
+  (defun load-source-code-pro ()
+    "Load the Source Code Pro font"
+    (interactive)
+    (set-default-font "Source Code Pro 12"))
+  (define-key switch-font (kbd "s") 'load-source-code-pro)
+
+  (defun load-triplicate ()
+    "Load the Triplicate font"
+    (interactive)
+    (set-default-font "Triplicate T4c 12"))
+  (define-key switch-font (kbd "t") 'load-triplicate)
 #+END_SRC
