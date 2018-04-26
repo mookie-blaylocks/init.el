@@ -21,13 +21,10 @@
 ** Package List
 #+BEGIN_SRC emacs-lisp
   (setq package-list
-        '(challenger-deep-theme
-          dracula-theme
-          scala-mode
+        '(scala-mode
           slime
           elpy
-          which-key
-          zerodark-theme))
+          which-key))
 #+END_SRC
 ** Install Missing
 #+BEGIN_SRC emacs-lisp
@@ -272,11 +269,27 @@
 #+END_SRC
 * Load Theme
 #+BEGIN_SRC emacs-lisp
+  (setq theme-list
+       '(ample-theme
+         anti-zenburn-theme
+         base16-theme
+         challenger-deep-theme
+         faff-theme
+         leuven-theme
+         plan9-theme
+         solarized-theme
+         twilight-bright-theme
+         zerodark-theme))
+
+  (mapc #'(lambda (theme)
+            (unless (package-installed-p theme)
+              (package-install theme)))
+        theme-list)
+
   (add-hook 'after-init-hook (lambda ()
                                (zerodark-setup-modeline-format)
                                ;; (load-theme 'org-beautify t)
-                               (medium-theme)))
-
+                               (load-anti-zenburn)))
 
   (defun disable-all-themes ()
     "Disable themes before initializing a new one"
@@ -293,36 +306,93 @@
     (disable-theme 'twilight-bright)
     (disable-theme 'zerodark))
 
-  (defun light-theme ()
-    "Load the light theme"
+  (define-prefix-command 'load-light-theme)
+  (global-set-key (kbd "C-c l") 'load-light-theme) ;; Light theme prefix
+  (define-prefix-command 'load-medium-theme)
+  (global-set-key (kbd "C-c m") 'load-medium-theme) ;; Medium theme prefix
+  (define-prefix-command 'load-dark-theme)
+  (global-set-key (kbd "C-c d") 'load-dark-theme) ;; Dark theme prefix
+
+  ;; Light Themes
+
+  (defun load-leuven ()
+    "Load the leuven theme"
     (interactive)
     (disable-all-themes)
-    ;; Alternatives
-    ;; (load-theme 'leuven t))
-    ;; (load-theme 'plan9 t))
+    (load-theme 'leuven t))
+  (define-key load-light-theme (kbd "l") 'load-leuven)
+
+  (defun load-plan9 ()
+    "Load the plan9 theme"
+    (interactive)
+    (disable-all-themes)
+    (load-theme 'plan9-theme t))
+  (define-key load-light-theme (kbd "p") 'load-plan9)
+
+  (defun load-solarized-light ()
+    "Load the solarized-light theme"
+    (interactive)
+    (disable-all-themes)
+    (load-theme 'solarized-light t))
+  (define-key load-light-theme (kbd "s") 'load-solarized-light)
+
+  (defun load-twilight-bright ()
+    "Load the twilight-bright theme"
+    (interactive)
+    (disable-all-themes)
     (load-theme 'twilight-bright t))
-    ;; (load-theme 'solarized-light t))
-  (global-set-key (kbd "C-c l") 'light-theme)
+  (define-key load-light-theme (kbd "t") 'load-twilight-bright)
 
-  (defun medium-theme ()
-    "Load the medium theme"
+  ;; Medium Themes
+
+  (defun load-ample-light ()
+    "Load the ample-light theme"
     (interactive)
     (disable-all-themes)
-    ;; Alternatives
-    ;; (load-theme 'ample-light t))
-    ;; (load-theme 'faff t))
+    (load-theme 'ample-light t))
+  (define-key load-medium-theme (kbd "a") 'load-ample-light)
+
+  (defun load-faff ()
+    "Load the faff theme"
+    (interactive)
+    (disable-all-themes)
+    (load-theme 'faff t))
+  (define-key load-medium-theme (kbd "f") 'load-faff)
+
+  (defun load-anti-zenburn ()
+    "Load the anti-zenburn theme"
+    (interactive)
+    (disable-all-themes)
     (load-theme 'anti-zenburn t))
-  (global-set-key (kbd "C-c m") 'medium-theme)
+  (define-key load-medium-theme (kbd "z") 'load-anti-zenburn)
 
-  (defun dark-theme ()
-    "Load the dark theme"
+  ;; Dark Themes
+
+  (defun load-challenger-deep ()
+    "Load the challenger-deep theme"
     (interactive)
     (disable-all-themes)
-    ;; Alternatives
-    ;; (load-theme 'base16-dracula t))
-    ;; (load-theme 'solarized-dark t))
-    ;; (load-theme 'zerodark t))
     (load-theme 'challenger-deep t))
-  (global-set-key (kbd "C-c d") 'dark-theme)
+  (define-key load-dark-theme (kbd "c") 'load-challenger-deep)
 
+  (defun load-base16-dracula ()
+    "Load the base16-dracula theme"
+    (interactive)
+    (disable-all-themes)
+    (load-theme 'base16-dracula t))
+  (define-key load-dark-theme (kbd "d") 'load-base16-dracula)
+
+  (defun load-solarized-dark ()
+    "Load the solarized-dark theme"
+    (interactive)
+    (disable-all-themes)
+    (load-theme 'solarized-dark t))
+  (define-key load-dark-theme (kbd "s") 'load-solarized-dark)
+
+  (defun load-zerodark ()
+    "Load the zerodark theme"
+    (interactive)
+    (disable-all-themes)
+    (load-theme 'zerodark t))
+  (define-key load-dark-theme (kbd "z") 'load-zerodark)
 #+END_SRC
