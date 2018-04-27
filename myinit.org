@@ -23,7 +23,7 @@
   (setq package-list
         '(scala-mode
           slime
-          rainbow-delimiters
+          rainbow-mode
           elpy
           which-key))
 #+END_SRC
@@ -213,7 +213,7 @@
 #+END_SRC
 ** prog-mode
 #+BEGIN_SRC emacs-lisp
-  (add-hook 'prog-mode-hook 'rainbow-delimiters)
+  (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 #+END_SRC
 * Set Variables
 #+BEGIN_SRC emacs-lisp
