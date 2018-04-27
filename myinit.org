@@ -23,6 +23,7 @@
   (setq package-list
         '(scala-mode
           slime
+          rainbow-delimiters
           elpy
           which-key))
 #+END_SRC
@@ -210,6 +211,10 @@
                                  (visual-line-mode)
                                  (flyspell-mode)))
 #+END_SRC
+** prog-mode
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'prog-mode-hook 'rainbow-delimiters)
+#+END_SRC
 * Set Variables
 #+BEGIN_SRC emacs-lisp
   (custom-set-variables
@@ -263,7 +268,6 @@
   (global-linum-mode)
   (scroll-bar-mode -1)
   (show-paren-mode t)
-  (smartparens-mode)
   (tool-bar-mode -1)
   (menu-bar-mode -1)
 #+END_SRC
