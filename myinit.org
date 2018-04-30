@@ -311,97 +311,97 @@
     (disable-theme 'twilight-bright)
     (disable-theme 'zerodark))
 
+  (defun load-key-theme (key-theme)
+    "Load the given key-theme"
+    (disable-all-themes)
+    (load-theme key-theme t))
+
   ;; Light Themes
 
   (define-prefix-command 'load-light-theme)
   (global-set-key (kbd "C-c l") load-light-theme) ;; Light theme prefix
 
-  (defun load-leuven-theme ()
-    "Load the leuven theme"
-    (interactive)
-    (disable-all-themes)
-    (load-theme 'leuven t))
-  (define-key load-light-theme (kbd "l") 'load-leuven-theme)
+  (define-key load-light-theme (kbd "l")
+    '(lambda ()
+       (interactive)
+       (load-key-theme 'leuven)))
+  (which-key-add-key-based-replacements "C-c l l" "leuven")
 
-  (defun load-plan9-theme ()
-    "Load the plan9 theme"
-    (interactive)
-    (disable-all-themes)
-    (load-theme 'plan9 t))
-  (define-key load-light-theme (kbd "p") 'load-plan9-theme)
+  (define-key load-light-theme (kbd "p")
+    '(lambda ()
+       (interactive)
+       (load-key-theme 'plan9)))
+  (which-key-add-key-based-replacements "C-c l p" "plan9")
 
-  (defun load-solarized-light-theme ()
-    "Load the solarized-light theme"
-    (interactive)
-    (disable-all-themes)
-    (load-theme 'solarized-light t))
-  (define-key load-light-theme (kbd "s") 'load-solarized-light-theme)
+  (define-key load-light-theme (kbd "s")
+    '(lambda ()
+       (interactive)
+       (load-key-theme 'solarized-light)))
+  (which-key-add-key-based-replacements "C-c l s" "solarized-light")
 
-  (defun load-twilight-bright-theme ()
-    "Load the twilight-bright theme"
-    (interactive)
-    (disable-all-themes)
-    (load-theme 'twilight-bright t))
-  (define-key load-light-theme (kbd "t") 'load-twilight-bright-theme)
+  (define-key load-light-theme (kbd "t")
+    '(lambda ()
+       (interactive)
+       (load-key-theme 'twilight-bright)))
+  (which-key-add-key-based-replacements "C-c l t" "twilight-bright")
 
   ;; Medium Themes
 
   (define-prefix-command 'load-medium-theme)
   (global-set-key (kbd "C-c m") 'load-medium-theme) ;; Medium theme prefix
 
-  (defun load-ample-light-theme ()
-    "Load the ample-light theme"
-    (interactive)
-    (disable-all-themes)
-    (load-theme 'ample-light t))
-  (define-key load-medium-theme (kbd "a") 'load-ample-light-theme)
+  (define-key load-medium-theme (kbd "a")
+    '(lambda ()
+       (interactive)
+       (load-key-theme 'ample-light)))
+  (which-key-add-key-based-replacements "C-c m a" "ample-light")
 
-  (defun load-faff-theme ()
-    "Load the faff theme"
-    (interactive)
-    (disable-all-themes)
-    (load-theme 'faff t))
-  (define-key load-medium-theme (kbd "f") 'load-faff-theme)
+  (define-key load-medium-theme (kbd "f")
+    '(lambda ()
+       (interactive)
+       (load-key-theme 'faff)))
+  (which-key-add-key-based-replacements "C-c m f" "faff")
 
-  (defun load-zenburn-theme ()
-    "Load the zenburn theme"
-    (interactive)
-    (disable-all-themes)
-    (load-theme 'zenburn t))
-  (define-key load-medium-theme (kbd "z") 'load-zenburn-theme)
+  (define-key load-medium-theme (kbd "n")
+    '(lambda ()
+       (interactive)
+       (load-key-theme 'anti-zenburn)))
+  (which-key-add-key-based-replacements "C-c m n" "anti-zenburn")
+
+  (define-key load-medium-theme (kbd "z")
+    '(lambda ()
+       (interactive)
+       (load-key-theme 'zenburn)))
+  (which-key-add-key-based-replacements "C-c m z" "zenburn")
 
   ;; Dark Themes
 
   (define-prefix-command 'load-dark-theme)
   (global-set-key (kbd "C-c d") 'load-dark-theme) ;; Dark theme prefix
 
-  (defun load-challenger-deep-theme ()
-    "Load the challenger-deep theme"
-    (interactive)
-    (disable-all-themes)
-    (load-theme 'challenger-deep t))
-  (define-key load-dark-theme (kbd "c") 'load-challenger-deep-theme)
+  (define-key load-dark-theme (kbd "c")
+    '(lambda ()
+       (interactive)
+       (load-key-theme 'challenger-deep)))
+  (which-key-add-key-based-replacements "C-c d c" "challenger-deep")
 
-  (defun load-base16-dracula-theme ()
-    "Load the base16-dracula theme"
-    (interactive)
-    (disable-all-themes)
-    (load-theme 'base16-dracula t))
-  (define-key load-dark-theme (kbd "d") 'load-base16-dracula-theme)
+  (define-key load-dark-theme (kbd "d")
+    '(lambda ()
+       (interactive)
+       (load-key-theme 'base16-dracula)))
+  (which-key-add-key-based-replacements "C-c d d" "base16-dracula")
 
-  (defun load-solarized-dark-theme ()
-    "Load the solarized-dark theme"
-    (interactive)
-    (disable-all-themes)
-    (load-theme 'solarized-dark t))
-  (define-key load-dark-theme (kbd "s") 'load-solarized-dark-theme)
+  (define-key load-dark-theme (kbd "solarized-dark")
+    '(lambda ()
+       (interactive)
+       (load-key-theme 'solarized-dark)))
+  (which-key-add-key-based-replacements "C-c d s" "solarized-dark")
 
-  (defun load-zerodark-theme ()
-    "Load the zerodark theme"
-    (interactive)
-    (disable-all-themes)
-    (load-theme 'zerodark t))
-  (define-key load-dark-theme (kbd "z") 'load-zerodark-theme)
+  (define-key load-dark-theme (kbd "z")
+    '(lambda ()
+       (interactive)
+       (load-key-theme 'zerodark)))
+  (which-key-add-key-based-replacements "C-c d z" "zerodark")
 
 #+END_SRC
 * Set Fonts
@@ -409,27 +409,17 @@
   (define-prefix-command 'switch-font)
   (global-set-key (kbd "C-c f") 'switch-font)
 
-  (defun load-anonymous-pro ()
-    "Load the Anonymous Pro font"
-    (interactive)
-    (set-default-font "Anonymous Pro 12"))
-  (define-key switch-font (kbd "a") 'load-anonymous-pro)
+  (define-key switch-font "a"
+    '(lambda () (interactive) (set-font "Anonymous Pro 12")))
+  (which-key-add-key-based-replacements "C-c f a" "Anonymous Pro")
+  (define-key switch-font "i"
+    '(lambda () (interactive) (set-font "Inconsolata 12")))
+  (which-key-add-key-based-replacements "C-c f a" "Inconsolata")
+  (define-key switch-font "s"
+    '(lambda () (interactive) (set-font "Source Code Pro 12")))
+  (which-key-add-key-based-replacements "C-c f a" "Source Code Pro")
+  (define-key switch-font "t"
+    '(lambda () (interactive) (set-font "Triplicate T4c 12")))
+  (which-key-add-key-based-replacements "C-c f a" "Triplicate")
 
-  (defun load-inconsolata ()
-    "Load the Inconsolata font"
-    (interactive)
-    (set-default-font "Inconsolata 12"))
-  (define-key switch-font (kbd "i") 'load-inconsolata)
-
-  (defun load-source-code-pro ()
-    "Load the Source Code Pro font"
-    (interactive)
-    (set-default-font "Source Code Pro 12"))
-  (define-key switch-font (kbd "s") 'load-source-code-pro)
-
-  (defun load-triplicate ()
-    "Load the Triplicate font"
-    (interactive)
-    (set-default-font "Triplicate T4c 12"))
-  (define-key switch-font (kbd "t") 'load-triplicate)
 #+END_SRC
