@@ -294,7 +294,7 @@
   (add-hook 'after-init-hook (lambda ()
                                (zerodark-setup-modeline-format)
                                ;; (load-theme 'org-beautify t)
-                               (load-ample-light-theme)))
+                               (load-leuven-theme)))
 
   (defun disable-all-themes ()
     "Disable themes before initializing a new one"
@@ -424,7 +424,7 @@
   (defun load-source-code-pro ()
     "Load the Source Code Pro font"
     (interactive)
-    (set-default-font "Source Code Pro 12"))
+    (set-default-font "Source Code Variable 12"))
   (define-key switch-font (kbd "s") 'load-source-code-pro)
 
   (defun load-triplicate ()
