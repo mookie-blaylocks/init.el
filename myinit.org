@@ -424,6 +424,7 @@
   (defun load-source-code-pro ()
     "Load the Source Code Pro font"
     (interactive)
+    (set-default-font "Source Code Pro 12")
     (set-default-font "Source Code Variable 12"))
   (define-key switch-font (kbd "s") 'load-source-code-pro)
 
