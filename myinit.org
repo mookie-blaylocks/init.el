@@ -294,7 +294,7 @@
   (add-hook 'after-init-hook (lambda ()
                                (zerodark-setup-modeline-format)
                                ;; (load-theme 'org-beautify t)
-                               (load-ample-light-theme)))
+                               (load-leuven-theme)))
 
   (defun disable-all-themes ()
     "Disable themes before initializing a new one"
@@ -422,4 +422,4 @@
     '(lambda () (interactive) (set-font "Triplicate T4c 12")))
   (which-key-add-key-based-replacements "C-c f a" "Triplicate")
 
-#+END_SRC
+  #+END_SRC
