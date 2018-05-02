@@ -410,16 +410,21 @@
   (global-set-key (kbd "C-c f") 'switch-font)
 
   (define-key switch-font "a"
-    '(lambda () (interactive) (set-font "Anonymous Pro 12")))
+    '(lambda () (interactive) (set-frame-font "Anonymous Pro 12")))
   (which-key-add-key-based-replacements "C-c f a" "Anonymous Pro")
+
   (define-key switch-font "i"
-    '(lambda () (interactive) (set-font "Inconsolata 12")))
-  (which-key-add-key-based-replacements "C-c f a" "Inconsolata")
+    '(lambda () (interactive) (set-frame-font "Inconsolata 12")))
+  (which-key-add-key-based-replacements "C-c f i" "Inconsolata")
+
   (define-key switch-font "s"
-    '(lambda () (interactive) (set-font "Source Code Pro 12")))
-  (which-key-add-key-based-replacements "C-c f a" "Source Code Pro")
+    '(lambda () (interactive) (if (null (x-list-fonts "Source Code Variable"))
+                                  (set-frame-font "Source Code Pro 12")
+                                  (set-frame-font "Source Code Variable 12"))))
+  (which-key-add-key-based-replacements "C-c f s" "Source Code Pro")
+
   (define-key switch-font "t"
-    '(lambda () (interactive) (set-font "Triplicate T4c 12")))
-  (which-key-add-key-based-replacements "C-c f a" "Triplicate")
+    '(lambda () (interactive) (set-frame-font "Triplicate T4c 12")))
+  (which-key-add-key-based-replacements "C-c f t" "Triplicate")
 
   #+END_SRC
