@@ -294,7 +294,7 @@
   (add-hook 'after-init-hook (lambda ()
                                (zerodark-setup-modeline-format)
                                ;; (load-theme 'org-beautify t)
-                               (load-leuven-theme)))
+                               (load-theme 'twilight-bright t)))
 
   (defun disable-all-themes ()
     "Disable themes before initializing a new one"
