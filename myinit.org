@@ -427,4 +427,9 @@
     '(lambda () (interactive) (set-frame-font "Triplicate T4c 12")))
   (which-key-add-key-based-replacements "C-c f t" "Triplicate")
 
+  (define-key switch-font "c"
+    '(lambda () (interactive) (set-frame-font "Charter 12")))
+  (which-key-add-key-based-replacements "C-c f c" "Charter")
+
+
   #+END_SRC
