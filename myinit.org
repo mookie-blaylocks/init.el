@@ -431,5 +431,9 @@
     '(lambda () (interactive) (set-frame-font "Charter 12")))
   (which-key-add-key-based-replacements "C-c f c" "Charter")
 
+  (define-key switch-font "f"
+    '(lambda () (interactive) (set-frame-font "Fira Sans 12")))
+  (which-key-add-key-based-replacements "C-c f f" "Fira Sans")
+
 
   #+END_SRC
