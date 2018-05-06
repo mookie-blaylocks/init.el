@@ -391,7 +391,7 @@
        (load-key-theme 'base16-dracula)))
   (which-key-add-key-based-replacements "C-c d d" "base16-dracula")
 
-  (define-key load-dark-theme (kbd "solarized-dark")
+  (define-key load-dark-theme (kbd "s")
     '(lambda ()
        (interactive)
        (load-key-theme 'solarized-dark)))
