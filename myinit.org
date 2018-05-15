@@ -413,9 +413,29 @@
     '(lambda () (interactive) (set-frame-font "Anonymous Pro 12")))
   (which-key-add-key-based-replacements "C-c f a" "Anonymous Pro")
 
+  (define-key switch-font "c"
+    '(lambda () (interactive) (set-frame-font "Charter 12")))
+  (which-key-add-key-based-replacements "C-c f c" "Charter")
+
+  (define-key switch-font "f"
+    '(lambda () (interactive) (set-frame-font "Fira Sans 12")))
+  (which-key-add-key-based-replacements "C-c f f" "Fira Sans")
+
+  (define-key switch-font "h"
+    '(lambda () (interactive (set-frame-font "Hack 12"))))
+  (which-key-add-key-based-replacements "C-c f h" "Hack")
+
   (define-key switch-font "i"
     '(lambda () (interactive) (set-frame-font "Inconsolata 12")))
   (which-key-add-key-based-replacements "C-c f i" "Inconsolata")
+
+  (define-key switch-font "p"
+    '(lambda () (interactive) (set-frame-font "Space Mono 12")))
+  (which-key-add-key-based-replacements "C-c f p" "Space Mono")
+
+  (define-key switch-font "r"
+    '(lambda () (interactive) (set-frame-font "Fira Code 12")))
+  (which-key-add-key-based-replacements "C-c f r" "Fira Code")
 
   (define-key switch-font "s"
     '(lambda () (interactive) (if (null (x-list-fonts "Source Code Variable"))
@@ -426,14 +446,5 @@
   (define-key switch-font "t"
     '(lambda () (interactive) (set-frame-font "Triplicate T4c 12")))
   (which-key-add-key-based-replacements "C-c f t" "Triplicate")
-
-  (define-key switch-font "c"
-    '(lambda () (interactive) (set-frame-font "Charter 12")))
-  (which-key-add-key-based-replacements "C-c f c" "Charter")
-
-  (define-key switch-font "f"
-    '(lambda () (interactive) (set-frame-font "Fira Sans 12")))
-  (which-key-add-key-based-replacements "C-c f f" "Fira Sans")
-
 
   #+END_SRC
