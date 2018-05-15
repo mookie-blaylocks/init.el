@@ -215,6 +215,10 @@
 #+BEGIN_SRC emacs-lisp
   (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 #+END_SRC
+** prolog-mode
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'auto-mode-alist '("\\.\\(pl\\|pro\\|lgt\\)" . prolog-mode))
+#+END_SRC
 * Set Variables
 #+BEGIN_SRC emacs-lisp
   (custom-set-variables
