@@ -22,6 +22,7 @@
 #+BEGIN_SRC emacs-lisp
   (setq package-list
         '(scala-mode
+          use-package
           slime
           rainbow-mode
           elpy
@@ -259,6 +260,20 @@ Don't keep message buffers around
                :custom
                (flycheck-display-errors-delay .3)
                (flycheck-stylelintrc "~/.stylelintrc.json"))
+
+  (setq flycheck-list
+        '(flycheck-clojure
+          flycheck-ghcmod
+          flycheck-haskell
+          flycheck-kotlin
+          flycheck-pyflakes
+          flycheck-rust
+          flycheck-yamllint
+          flymake-haskel
+          flymake-json
+          flymake-python-pyflakes
+          flycheck-rust
+          flycheck-yaml))
 
 #+END_SRC
 * Mode Hooks
