@@ -90,6 +90,60 @@
   (setq org-agenda-files
         (find-lisp-find-files org-directory "\.org$"))
 #+END_SRC
+* mu4e settings
+#+BEGIN_SRC emacs-lisp
+  (require 'mu4e)
+  (setq mail-user-agent 'mu4e-user-agent)
+#+END_SRC
+** Set default folders
+#+BEGIN_SRC emacs-lisp
+  (setq mu4e-maildir "~/Maildir")
+  (setq mu4e-drafts-folder "/[Gmail].Drafts")
+  (setq mu4e-sent-folder "/[Gmail].Sent Mail")
+  (setq mu4e-trasn-folder "/[Gmail].Trash")
+
+  ;; don't save messages to Sent Messages, Gmail/IMAP takes care of this
+  (setq mu4e-sent-messages-behavior 'delete)
+#+END_SRC
+See the documentation for `mu4e-sent-messages-behavior' if you have additional non-Gmail addresses and want to assign them different behavior.
+** Handy shortcuts
+You can switch quickly between your Inbox -- press ``ji'' then, when you want to archive some messages, move them to the 'All Mail' folder by pressing ``ma''.
+#+BEGIN_SRC emacs-lisp
+  (setq mu4e-maildir-shortcuts
+        '(("/INBOX"             . ?i)
+          ("/[Gmail].Sent Mail" . ?s)
+          ("/[Gmail].Trash"     . ?t)
+          ("/[Gmail].All Mail"  . ?a)))
+#+END_SRC
+
+Update mail using 'U' in the mail view:
+#+BEGIN_SRC emacs-lisp
+  (setq mu4e-get-mail-command "offlineimap")
+#+END_SRC
+** Personal information
+#+BEGIN_SRC emacs-lisp
+  (setq
+   user-mail-address "charles.l.threlkeld@gmail.com"
+   user-full-name "Charles Threlkeld")
+#+END_SRC
+** Sending Mail
+Be sure that gnutls-bin is installed via apt
+#+BEGIN_SRC emacs-lisp
+  (require 'smtpmail)
+  (setq message-send-mail-function 'smtpmail-send-it
+        starttls-use-gnutls t
+        smtpmail-starttls-credentials '(("smtp.gmail.com" 587 nil nil))
+        smtpmail-auth-credentials
+          '(("smtp.gmail.com" 587 "charles.l.threlkeld@gmail.com" nil nil))
+        smtpmail-default-smtp-server "smtp.gmail.com"
+        smtpmail-smtp-server "smtp.gmail.com"
+        smtp-smtp-service 587)
+#+END_SRC
+** Message Buffer Preference
+Don't keep message buffers around
+#+BEGIN_SRC emacs-lisp
+  (setq message-kill-buffers-on-exit t)
+#+END_SRC
 * Org-mode Capture
 #+BEGIN_SRC emacs-lisp
   (defun org-capture-event ()
@@ -196,6 +250,17 @@
   (global-set-key (kbd "M-o") 'other-window)
   (define-key global-map (kbd "RET") 'newline-and-indent)
 #+END_SRC
+* Flymake Settings
+#+BEGIN_SRC emacs-lisp
+  (use-package flycheck
+               :defer 2
+               :diminish
+               :init (global-flycheck-mode)
+               :custom
+               (flycheck-display-errors-delay .3)
+               (flycheck-stylelintrc "~/.stylelintrc.json"))
+
+#+END_SRC
 * Mode Hooks
 ** org-mode
 #+BEGIN_SRC emacs-lisp
@@ -218,6 +283,25 @@
 ** prolog-mode
 #+BEGIN_SRC emacs-lisp
   (add-to-list 'auto-mode-alist '("\\.\\(pl\\|pro\\|lgt\\)" . prolog-mode))
+#+END_SRC
+** python-mode
+#+BEGIN_SRC emacs-lisp
+  (with-eval-after-load 'python-mode
+    (add-hook 'flycheck-mode-hook #'flycheck-python-setup))
+#+END_SRC
+** rust-mode
+#+BEGIN_SRC emacs-lisp
+  (with-eval-after-load 'rust-mode
+    (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
+#+END_SRC
+** server-switch
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'server-switch-hook
+            (lambda ()
+              (when (current-local-map)
+                (use-local-map (copy-keymap (current-local-map))))
+              (when server-buffer-clients
+                (local-set-key (kbd "C-x k") 'server-edit))))
 #+END_SRC
 * Set Variables
 #+BEGIN_SRC emacs-lisp
@@ -452,3 +536,7 @@
   (which-key-add-key-based-replacements "C-c f t" "Triplicate")
 
   #+END_SRC
+* Start Server
+#+BEGIN_SRC emacs-lisp
+  (server-start)
+#+END_SRC
