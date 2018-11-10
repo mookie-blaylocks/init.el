@@ -61,7 +61,7 @@
 * Org-mode Settings
 #+BEGIN_SRC emacs-lisp
   (load-file (concat user-emacs-directory "home-directory.el"))
-  (setq org-directory (concat home-directory "Dropbox/Org/"))
+  (setq org-directory (concat home-directory "/Dropbox/Org/"))
 
   (setq org-log-done t)
 
@@ -396,7 +396,7 @@
   (add-hook 'after-init-hook (lambda ()
                                (zerodark-setup-modeline-format)
                                ;; (load-theme 'org-beautify t)
-                               (load-theme 'twilight-bright t)))
+                               (load-theme 'zerodark t)))
 
   (defun disable-all-themes ()
     "Disable themes before initializing a new one"
