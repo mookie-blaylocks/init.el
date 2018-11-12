@@ -21,7 +21,8 @@
 ** Package List
 #+BEGIN_SRC emacs-lisp
   (setq package-list
-        '(cl
+        '(cider
+	      cl
           dash
           elpy
           org-ref
